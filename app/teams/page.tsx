@@ -65,7 +65,7 @@ export default function TeamsPage() {
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <Field label="Favorite driver" value={qa.favorite_driver} />
                 <Field label="Favorite constructor" value={qa.favorite_constructor} />
-                <Field label="Race to attend" value={qa.race_to_attend} />
+                <Field label="Race want to attend" value={qa.race_to_attend} />
                 <Field label="Dream car" value={qa.dream_car} />
               </div>
             </div>
