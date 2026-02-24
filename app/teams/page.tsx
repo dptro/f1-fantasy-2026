@@ -14,6 +14,14 @@ function Field({ label, value }: { label: string; value?: string }) {
   );
 }
 
+function ChipPill({ label }: { label: string }) {
+  return (
+    <span className="rounded-full border border-white/20 bg-transparent px-2 py-1 text-xs text-white/80">
+      {label}
+    </span>
+  );
+}
+
 export default function TeamsPage() {
   const teams = loadTeams();
   const entries = Object.entries(teams).sort((a, b) =>
@@ -25,7 +33,7 @@ export default function TeamsPage() {
       <header>
         <h2 className="text-lg font-semibold text-white">Teams</h2>
         <p className="mt-1 text-sm text-white/70">
-          League directory (logos + Q&amp;A).
+          League directory (personality + chips + weekly trend placeholders).
         </p>
       </header>
 
@@ -59,14 +67,45 @@ export default function TeamsPage() {
                     {team.team_name}
                   </div>
                   <div className="text-xs text-white/70">Player ID: {playerId}</div>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <ChipPill label="Season pts: —" />
+                    <ChipPill label="Rank: —" />
+                  </div>
                 </div>
               </div>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <Field label="Favorite driver" value={qa.favorite_driver} />
                 <Field label="Favorite constructor" value={qa.favorite_constructor} />
-                <Field label="Race want to attend" value={qa.race_to_attend} />
+                <Field label="Race to attend" value={qa.race_to_attend} />
                 <Field label="Dream car" value={qa.dream_car} />
+              </div>
+
+              <div className="mt-4 rounded-xl border border-white/15 bg-transparent p-4">
+                <div className="text-xs font-semibold text-white">Chips</div>
+                <div className="mt-2 flex flex-wrap gap-2 text-xs text-white/80">
+                  <ChipPill label="Limitless: —" />
+                  <ChipPill label="Extra DRS: —" />
+                  <ChipPill label="Wild Card: —" />
+                  <ChipPill label="Final Fix: —" />
+                  <ChipPill label="No Negative: —" />
+                  <ChipPill label="Autopilot: —" />
+                </div>
+                <div className="mt-2 text-xs text-white/60">
+                  Later: ✅ used / — remaining.
+                </div>
+              </div>
+
+              <div className="mt-4 rounded-xl border border-white/15 bg-transparent p-4">
+                <div className="text-xs font-semibold text-white">
+                  Weekly performance
+                </div>
+                <div className="mt-2 text-sm text-white/80">
+                  — | — | — | — | — <span className="text-white/60">(placeholder)</span>
+                </div>
+                <div className="mt-2 text-xs text-white/60">
+                  Later: sparkline + round-by-round detail (expandable).
+                </div>
               </div>
             </div>
           );

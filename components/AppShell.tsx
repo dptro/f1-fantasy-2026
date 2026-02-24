@@ -8,14 +8,21 @@ type NavItem = { href: string; label: string; short: string };
 
 const NAV: NavItem[] = [
   { href: "/", label: "Dashboard", short: "D" },
-  { href: "/standings", label: "Weekly Standings", short: "W" },
-  { href: "/races", label: "Race Weekends", short: "R" },
+  { href: "/race-weekend", label: "Race Weekend", short: "R" },
+  { href: "/standings", label: "Standings", short: "S" },
   { href: "/teams", label: "Teams", short: "T" },
-  { href: "/stats", label: "Stats", short: "S" },
 ];
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
+}
+
+function TopChip({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full border border-white/20 bg-transparent px-2 py-1 text-xs text-white/80">
+      {children}
+    </span>
+  );
 }
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -44,12 +51,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="flex min-w-0 flex-1 items-baseline gap-3">
             <h1 className="truncate text-base font-semibold">F1 Fantasy 2026</h1>
             <span className="hidden text-xs text-white/70 sm:inline">
-              Season: 2026
+              League Dashboard
             </span>
           </div>
 
-          <span className="rounded-full border border-white/20 bg-transparent px-2 py-1 text-xs text-white/80">
-            Dark
+          <div className="hidden items-center gap-2 sm:flex">
+            <TopChip>Season: 2026</TopChip>
+            <TopChip>Snapshot: LATEST</TopChip>
+            <TopChip>Updated: —</TopChip>
+          </div>
+
+          <span className="sm:hidden rounded-full border border-white/20 bg-transparent px-2 py-1 text-xs text-white/80">
+            2026
           </span>
         </div>
       </header>
@@ -118,7 +131,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <div className="rounded-xl border border-white/15 bg-transparent p-3">
                 <div className="text-xs font-semibold text-white">Status</div>
                 <div className="mt-1 text-xs text-white/70">
-                  Data loader: coming soon
+                  Placeholders live • Data wiring next
                 </div>
               </div>
             </div>
