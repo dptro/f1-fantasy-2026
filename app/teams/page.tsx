@@ -3,8 +3,8 @@ import { loadTeams } from "../../lib/teams";
 
 function Field({ label, value }: { label: string; value?: string }) {
   return (
-    <div className="rounded-xl border border-white/15 bg-transparent p-3">
-      <div className="text-[11px] font-semibold uppercase tracking-wide text-white/70">
+    <div className="rounded-xl border border-white/10 bg-black/20 p-3">
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-white/60">
         {label}
       </div>
       <div className="mt-1 text-sm text-white">
@@ -16,9 +16,21 @@ function Field({ label, value }: { label: string; value?: string }) {
 
 function ChipPill({ label }: { label: string }) {
   return (
-    <span className="rounded-full border border-white/20 bg-transparent px-2 py-1 text-xs text-white/80">
+    <span className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-white/80">
       {label}
     </span>
+  );
+}
+
+function Card({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 border-t border-t-red-500/40 bg-white/[0.03] p-5">
+      {children}
+    </div>
   );
 }
 
@@ -32,7 +44,7 @@ export default function TeamsPage() {
     <div className="space-y-4">
       <header>
         <h2 className="text-lg font-semibold text-white">Teams</h2>
-        <p className="mt-1 text-sm text-white/70">
+        <p className="mt-1 text-sm text-white/60">
           League directory (personality + chips + weekly trend placeholders).
         </p>
       </header>
@@ -41,12 +53,9 @@ export default function TeamsPage() {
         {entries.map(([playerId, team]) => {
           const qa = team.qa ?? {};
           return (
-            <div
-              key={playerId}
-              className="rounded-2xl border border-white/15 bg-transparent p-5"
-            >
+            <Card key={playerId}>
               <div className="flex items-center gap-4">
-                <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-white/15 bg-black">
+                <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-white/10 bg-black">
                   {team.logo_path ? (
                     <Image
                       src={team.logo_path}
@@ -56,7 +65,7 @@ export default function TeamsPage() {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-xs text-white/60">
+                    <div className="flex h-full w-full items-center justify-center text-xs text-white/50">
                       LOGO
                     </div>
                   )}
@@ -66,7 +75,7 @@ export default function TeamsPage() {
                   <div className="truncate text-base font-semibold text-white">
                     {team.team_name}
                   </div>
-                  <div className="text-xs text-white/70">Player ID: {playerId}</div>
+                  <div className="text-xs text-white/60">Player ID: {playerId}</div>
                   <div className="mt-2 flex flex-wrap gap-2">
                     <ChipPill label="Season pts: —" />
                     <ChipPill label="Rank: —" />
@@ -81,9 +90,9 @@ export default function TeamsPage() {
                 <Field label="Dream car" value={qa.dream_car} />
               </div>
 
-              <div className="mt-4 rounded-xl border border-white/15 bg-transparent p-4">
+              <div className="mt-4 rounded-xl border border-white/10 bg-black/20 p-4">
                 <div className="text-xs font-semibold text-white">Chips</div>
-                <div className="mt-2 flex flex-wrap gap-2 text-xs text-white/80">
+                <div className="mt-2 flex flex-wrap gap-2">
                   <ChipPill label="Limitless: —" />
                   <ChipPill label="Extra DRS: —" />
                   <ChipPill label="Wild Card: —" />
@@ -91,23 +100,23 @@ export default function TeamsPage() {
                   <ChipPill label="No Negative: —" />
                   <ChipPill label="Autopilot: —" />
                 </div>
-                <div className="mt-2 text-xs text-white/60">
+                <div className="mt-2 text-xs text-white/50">
                   Later: ✅ used / — remaining.
                 </div>
               </div>
 
-              <div className="mt-4 rounded-xl border border-white/15 bg-transparent p-4">
+              <div className="mt-4 rounded-xl border border-white/10 bg-black/20 p-4">
                 <div className="text-xs font-semibold text-white">
                   Weekly performance
                 </div>
                 <div className="mt-2 text-sm text-white/80">
-                  — | — | — | — | — <span className="text-white/60">(placeholder)</span>
+                  — | — | — | — | — <span className="text-white/50">(placeholder)</span>
                 </div>
-                <div className="mt-2 text-xs text-white/60">
+                <div className="mt-2 text-xs text-white/50">
                   Later: sparkline + round-by-round detail (expandable).
                 </div>
               </div>
-            </div>
+            </Card>
           );
         })}
       </div>
